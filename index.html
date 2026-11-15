@@ -1,12 +1,1148 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Medatex | Catálogo Oficial de Ropa</title>
+  <link rel="icon" type="image/jpeg" href="Imagenes/Logo medatex.jpeg" />
+  <style>
+    :root {
+      --primary: #111827;
+      --accent: #2563eb;
+      --whatsapp: #16a34a;
+      --whatsapp-hover: #15803d;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --danger: #ef4444;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    /* Barra superior */
+    .top-bar {
+      background: var(--primary);
+      color: #fff;
+      text-align: center;
+      font-size: 0.85rem;
+      padding: 6px 12px;
+      letter-spacing: 0.3px;
+    }
+
+    /* Header y Navegación */
+    header {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+    }
+
+    .nav-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--primary);
+    }
+
+    .brand img {
+      height: 44px;
+      width: 44px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .brand span {
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+
+    /* Menús desplegables */
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      list-style: none;
+    }
+
+    .nav-item {
+      position: relative;
+    }
+
+    .nav-btn {
+      background: none;
+      border: none;
+      padding: 8px 14px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .nav-btn:hover,
+    .nav-btn.active {
+      background: #eff6ff;
+      color: var(--accent);
+    }
+
+    .dropdown {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      min-width: 190px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      padding: 6px;
+      z-index: 200;
+    }
+
+    .nav-item:hover .dropdown {
+      display: block;
+    }
+
+    .dropdown button {
+      width: 100%;
+      text-align: left;
+      background: none;
+      border: none;
+      padding: 9px 12px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .dropdown button:hover {
+      background: var(--bg);
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* Buscador y acciones */
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .search-box {
+      position: relative;
+    }
+
+    .search-box input {
+      padding: 8px 14px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-size: 0.9rem;
+      width: 210px;
+      outline: none;
+      transition: border-color 0.2s, width 0.2s;
+    }
+
+    .search-box input:focus {
+      border-color: var(--accent);
+      width: 250px;
+    }
+
+    .icon-btn {
+      position: relative;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 8px 12px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .icon-btn:hover {
+      border-color: var(--primary);
+      background: #fff;
+    }
+
+    .badge {
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.75rem;
+      padding: 2px 6px;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    /* Hero Banner */
+    .hero {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+      color: #fff;
+      padding: 48px 20px;
+      text-align: center;
+    }
+
+    .hero-content {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      color: #cbd5e1;
+      font-size: 1.05rem;
+      margin-bottom: 24px;
+    }
+
+    .hero-btns {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: #fff;
+      color: var(--primary);
+      border: none;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.15s;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+    }
+
+    /* Contenedor Principal */
+    .container {
+      max-width: 1280px;
+      margin: 28px auto;
+      padding: 0 20px;
+    }
+
+    /* Barra de Filtros */
+    .filters-bar {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .filter-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    select {
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: #fff;
+      font-size: 0.9rem;
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    /* Grid de Productos */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
+    }
+
+    .card-img-wrap {
+      position: relative;
+      width: 100%;
+      height: 250px;
+      background: #f1f5f9;
+      overflow: hidden;
+    }
+
+    .card-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .card:hover .card-img-wrap img {
+      transform: scale(1.04);
+    }
+
+    .tag {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: var(--primary);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+
+    .fav-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(255, 255, 255, 0.9);
+      border: none;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .fav-btn.active {
+      color: var(--danger);
+    }
+
+    .card-body {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      gap: 8px;
+    }
+
+    .card-cat {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .card-price {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .sizes {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin: 4px 0;
+    }
+
+    .size-pill {
+      border: 1px solid var(--border);
+      background: var(--bg);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .size-pill.selected {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    .card-actions {
+      margin-top: auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+      padding-top: 8px;
+    }
+
+    .btn-add {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-add:hover {
+      background: var(--accent);
+    }
+
+    .btn-view {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 10px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    /* Drawer Carrito y Modal */
+    .overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.55);
+      z-index: 300;
+    }
+
+    .overlay.open {
+      display: block;
+    }
+
+    .drawer {
+      position: fixed;
+      top: 0;
+      right: -420px;
+      width: 100%;
+      max-width: 400px;
+      height: 100vh;
+      background: #fff;
+      z-index: 400;
+      display: flex;
+      flex-direction: column;
+      transition: right 0.3s ease;
+      box-shadow: -8px 0 30px rgba(0, 0, 0, 0.12);
+    }
+
+    .drawer.open {
+      right: 0;
+    }
+
+    .drawer-header {
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .drawer-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .cart-item {
+      display: flex;
+      gap: 12px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 12px;
+      align-items: center;
+    }
+
+    .cart-item img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .cart-item-info {
+      flex: 1;
+    }
+
+    .qty-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .qty-controls button {
+      width: 26px;
+      height: 26px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .drawer-footer {
+      padding: 18px 20px;
+      border-top: 1px solid var(--border);
+      background: var(--bg);
+    }
+
+    .btn-whatsapp {
+      width: 100%;
+      background: var(--whatsapp);
+      color: #fff;
+      border: none;
+      padding: 14px;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-whatsapp:hover {
+      background: var(--whatsapp-hover);
+    }
+
+    /* Modal Detalle */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #fff;
+      width: 92%;
+      max-width: 680px;
+      border-radius: 16px;
+      z-index: 450;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .modal.open {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .modal img {
+      width: 100%;
+      height: 100%;
+      min-height: 300px;
+      object-fit: cover;
+    }
+
+    .modal-content {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--primary);
+      color: #cbd5e1;
+      padding: 40px 20px;
+      margin-top: 60px;
+    }
+
+    .footer-grid {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+    }
+
+    footer h3 {
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    /* Responsive Celulares */
+    @media (max-width: 768px) {
+      .mobile-menu-btn {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        padding-top: 10px;
+        border-top: 1px solid var(--border);
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-item {
+        width: 100%;
+      }
+
+      .dropdown {
+        position: static;
+        box-shadow: none;
+        border: none;
+        padding-left: 16px;
+      }
+
+      .search-box input {
+        width: 145px;
+      }
+
+      .search-box input:focus {
+        width: 170px;
+      }
+
+      .hero h1 {
+        font-size: 1.65rem;
+      }
+
+      .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+
+      .card-img-wrap {
+        height: 180px;
+      }
+
+      .modal.open {
+        grid-template-columns: 1fr;
+        max-height: 90vh;
+        overflow-y: auto;
+      }
+    }
+  </style>
 </head>
 <body>
-    <h1>HIIII</h1>
-    <img src="Imagenes/Logo medatex.jpeg" alt="">
+
+  <div class="top-bar">
+    Envíos a todo el Ecuador • Pedidos directos por WhatsApp • Calidad garantizada Medatex
+  </div>
+
+  <header>
+    <div class="nav-container">
+      <!-- Logo conectado desde la carpeta Imagenes -->
+      <a href="#" class="brand" onclick="resetFilters()">
+        <img src="Imagenes/Logo medatex.jpeg" alt="Logo Medatex" />
+        <span>MEDATEX</span>
+      </a>
+
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+
+      <ul class="nav-links" id="navLinks">
+        <li class="nav-item">
+          <button class="nav-btn active" onclick="filterCategory('Todos')">Inicio</button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-btn">Hombre ▾</button>
+          <div class="dropdown">
+            <button onclick="filterCategory('Hombre')">Todo Hombre</button>
+            <button onclick="filterSubcategory('Camisetas')">Camisetas y Polos</button>
+            <button onclick="filterSubcategory('Pantalones')">Pantalones y Jeans</button>
+            <button onclick="filterSubcategory('Chaquetas')">Chaquetas y Busos</button>
+          </div>
+        </li>
+        <li class="nav-item">
+          <button class="nav-btn">Mujer ▾</button>
+          <div class="dropdown">
+            <button onclick="filterCategory('Mujer')">Todo Mujer</button>
+            <button onclick="filterSubcategory('Blusas')">Blusas y Tops</button>
+            <button onclick="filterSubcategory('Pantalones')">Pantalones</button>
+            <button onclick="filterSubcategory('Conjuntos')">Conjuntos</button>
+          </div>
+        </li>
+        <li class="nav-item">
+          <button class="nav-btn" onclick="filterCategory('Ofertas')">Ofertas 🔥</button>
+        </li>
+      </ul>
+
+      <div class="nav-actions">
+        <div class="search-box">
+          <input type="text" id="searchInput" placeholder="Buscar prenda..." oninput="renderProducts()" />
+        </div>
+        <button class="icon-btn" onclick="toggleOnlyFavs()" title="Ver Favoritos">
+          ❤️ <span class="badge" id="favCount">0</span>
+        </button>
+        <button class="icon-btn" onclick="openCart()" title="Ver Pedido">
+          🛒 <span class="badge" id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Nueva Colección Medatex</h1>
+      <p>Ropa cómoda, moderna y confeccionada con los mejores textiles. Elige tus tallas y envía tu pedido directo a nuestro WhatsApp.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="document.getElementById('catalogo').scrollIntoView({behavior:'smooth'})">
+          Explorar Catálogo
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <main class="container" id="catalogo">
+    <div class="filters-bar">
+      <div class="filter-group">
+        <strong id="catalogTitle">Mostrando: Todos los productos</strong>
+      </div>
+      <div class="filter-group">
+        <select id="sizeFilter" onchange="renderProducts()">
+          <option value="Todas">Todas las tallas</option>
+          <option value="S">Talla S</option>
+          <option value="M">Talla M</option>
+          <option value="L">Talla L</option>
+          <option value="XL">Talla XL</option>
+        </select>
+
+        <select id="sortFilter" onchange="renderProducts()">
+          <option value="default">Ordenar por: Destacados</option>
+          <option value="price-asc">Precio: Menor a Mayor</option>
+          <option value="price-desc">Precio: Mayor a Menor</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="products-grid" id="productsGrid"></div>
+  </main>
+
+  <!-- Overlay general -->
+  <div class="overlay" id="overlay" onclick="closeAllModals()"></div>
+
+  <!-- Carrito Lateral -->
+  <aside class="drawer" id="cartDrawer">
+    <div class="drawer-header">
+      <h3>Tu Pedido</h3>
+      <button class="icon-btn" onclick="closeAllModals()">✕</button>
+    </div>
+    <div class="drawer-body" id="cartItems"></div>
+    <div class="drawer-footer">
+      <div style="display:flex; justify-content:space-between; font-size:1.15rem; font-weight:800;">
+        <span>Total estimado:</span>
+        <span id="cartTotal">$0.00</span>
+      </div>
+      <button class="btn-whatsapp" onclick="sendWhatsAppOrder()">
+        📲 Pedir por WhatsApp
+      </button>
+    </div>
+  </aside>
+
+  <!-- Modal Vista Rápida -->
+  <div class="modal" id="productModal">
+    <img id="modalImg" src="" alt="Prenda" />
+    <div class="modal-content">
+      <div style="display:flex; justify-content:space-between; align-items:start;">
+        <span class="card-cat" id="modalCat"></span>
+        <button class="icon-btn" onclick="closeAllModals()">✕</button>
+      </div>
+      <h2 id="modalTitle"></h2>
+      <div class="card-price" id="modalPrice"></div>
+      <p id="modalDesc" style="color:var(--muted); font-size:0.95rem;"></p>
+      <div>
+        <strong>Tallas disponibles:</strong>
+        <div class="sizes" id="modalSizes" style="margin-top:6px;"></div>
+      </div>
+      <button class="btn-add" id="modalAddBtn" style="margin-top:auto;">Agregar al Pedido</button>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <h3>MEDATEX</h3>
+        <p>Confección y venta de prendas de vestir de alta calidad. Atención personalizada para ventas al por mayor y menor.</p>
+      </div>
+      <div>
+        <h3>Categorías</h3>
+        <p>Hombre • Mujer • Conjuntos • Ofertas de Temporada</p>
+      </div>
+      <div>
+        <h3>Contacto</h3>
+        <p>Pedidos directos vía WhatsApp • Envíos seguros a domicilio.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // 1. CAMBIA ESTE NÚMERO POR EL WHATSAPP DE TU PAPÁ (Código de país 593 + número sin el 0 inicial)
+    const WHATSAPP_NUMBER = "593999999999";
+
+    // 2. CATÁLOGO DE ROPA (Cambia las rutas "image" por tus fotos en la carpeta Imagenes/)
+    const PRODUCTS = [
+      {
+        id: 1,
+        name: "Camiseta Básica Algodón Premium",
+        category: "Hombre",
+        subcategory: "Camisetas",
+        price: 14.50,
+        tag: "Nuevo",
+        sizes: ["S", "M", "L", "XL"],
+        image: "Imagenes/Logo medatex.jpeg",
+        description: "Camiseta 100% algodón peinado suave al tacto, cuello redondo reforzado y corte moderno."
+      },
+      {
+        id: 2,
+        name: "Buso Hoodie Urbano Unisex",
+        category: "Hombre",
+        subcategory: "Chaquetas",
+        price: 28.00,
+        tag: "Más vendido",
+        sizes: ["M", "L", "XL"],
+        image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=600&q=80",
+        description: "Buso con capucha y bolsillo canguro, interior afelpado ideal para clima fresco."
+      },
+      {
+        id: 3,
+        name: "Blusa Casual Manga Corta",
+        category: "Mujer",
+        subcategory: "Blusas",
+        price: 16.00,
+        tag: "",
+        sizes: ["S", "M", "L"],
+        image: "https://images.unsplash.com/photo-1564257631407-4deb1f99d992?auto=format&fit=crop&w=600&q=80",
+        description: "Tela fresca y caída ligera, perfecta para uso diario o combinar con jeans."
+      },
+      {
+        id: 4,
+        name: "Jean Clásico Corte Recto",
+        category: "Hombre",
+        subcategory: "Pantalones",
+        price: 32.00,
+        tag: "",
+        sizes: ["S", "M", "L", "XL"],
+        image: "https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=600&q=80",
+        description: "Denim resistente con ligero elastano para mayor comodidad durante todo el día."
+      },
+      {
+        id: 5,
+        name: "Conjunto Deportivo Mujer",
+        category: "Mujer",
+        subcategory: "Conjuntos",
+        price: 35.00,
+        tag: "Oferta",
+        isOffer: true,
+        sizes: ["S", "M", "L"],
+        image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=600&q=80",
+        description: "Conjunto de dos piezas en tela deportiva respirable de secado rápido."
+      },
+      {
+        id: 6,
+        name: "Chaqueta Rompevientos Ligera",
+        category: "Ofertas",
+        subcategory: "Chaquetas",
+        price: 25.00,
+        tag: "-20% Oferta",
+        isOffer: true,
+        sizes: ["M", "L", "XL"],
+        image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=600&q=80",
+        description: "Chaqueta impermeable ligera con cierre completo y bolsillos laterales."
+      }
+    ];
+
+    let currentCategory = "Todos";
+    let currentSubcategory = null;
+    let onlyFavorites = false;
+    let favorites = [];
+    let cart = [];
+    let selectedSizes = {};
+
+    PRODUCTS.forEach(p => {
+      selectedSizes[p.id] = p.sizes[0];
+    });
+
+    function toggleMobileMenu() {
+      document.getElementById("navLinks").classList.toggle("open");
+    }
+
+    function filterCategory(cat) {
+      currentCategory = cat;
+      currentSubcategory = null;
+      onlyFavorites = false;
+      document.getElementById("catalogTitle").textContent = `Mostrando: ${cat}`;
+      document.getElementById("navLinks").classList.remove("open");
+      renderProducts();
+    }
+
+    function filterSubcategory(sub) {
+      currentSubcategory = sub;
+      onlyFavorites = false;
+      document.getElementById("catalogTitle").textContent = `Categoría: ${sub}`;
+      document.getElementById("navLinks").classList.remove("open");
+      renderProducts();
+    }
+
+    function resetFilters() {
+      currentCategory = "Todos";
+      currentSubcategory = null;
+      onlyFavorites = false;
+      document.getElementById("searchInput").value = "";
+      document.getElementById("sizeFilter").value = "Todas";
+      document.getElementById("sortFilter").value = "default";
+      document.getElementById("catalogTitle").textContent = "Mostrando: Todos los productos";
+      renderProducts();
+    }
+
+    function toggleOnlyFavs() {
+      onlyFavorites = !onlyFavorites;
+      document.getElementById("catalogTitle").textContent = onlyFavorites
+        ? "Mostrando: Tus Favoritos ❤️"
+        : `Mostrando: ${currentCategory}`;
+      renderProducts();
+    }
+
+    function toggleFavorite(id) {
+      if (favorites.includes(id)) {
+        favorites = favorites.filter(f => f !== id);
+      } else {
+        favorites.push(id);
+      }
+      document.getElementById("favCount").textContent = favorites.length;
+      renderProducts();
+    }
+
+    function selectSize(productId, size) {
+      selectedSizes[productId] = size;
+      renderProducts();
+    }
+
+    function renderProducts() {
+      const grid = document.getElementById("productsGrid");
+      const search = document.getElementById("searchInput").value.toLowerCase();
+      const sizeFilter = document.getElementById("sizeFilter").value;
+      const sortFilter = document.getElementById("sortFilter").value;
+
+      let filtered = PRODUCTS.filter(p => {
+        const matchSearch = p.name.toLowerCase().includes(search) || p.subcategory.toLowerCase().includes(search);
+        const matchCat =
+          currentCategory === "Todos" ||
+          p.category === currentCategory ||
+          (currentCategory === "Ofertas" && p.isOffer);
+        const matchSub = !currentSubcategory || p.subcategory === currentSubcategory;
+        const matchSize = sizeFilter === "Todas" || p.sizes.includes(sizeFilter);
+        const matchFav = !onlyFavorites || favorites.includes(p.id);
+        return matchSearch && matchCat && matchSub && matchSize && matchFav;
+      });
+
+      if (sortFilter === "price-asc") filtered.sort((a, b) => a.price - b.price);
+      if (sortFilter === "price-desc") filtered.sort((a, b) => b.price - a.price);
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<p style="grid-column:1/-1; text-align:center; padding:40px; color:var(--muted);">No se encontraron prendas con ese filtro.</p>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(p => {
+        const isFav = favorites.includes(p.id);
+        return `
+          <article class="card">
+            <div class="card-img-wrap">
+              ${p.tag ? `<span class="tag">${p.tag}</span>` : ""}
+              <button class="fav-btn ${isFav ? "active" : ""}" onclick="toggleFavorite(${p.id})">
+                ${isFav ? "❤️" : "🤍"}
+              </button>
+              <img src="${p.image}" alt="${p.name}" onclick="openModal(${p.id})" />
+            </div>
+            <div class="card-body">
+              <span class="card-cat">${p.category} • ${p.subcategory}</span>
+              <h3 class="card-title">${p.name}</h3>
+              <div class="card-price">$${p.price.toFixed(2)}</div>
+              <div class="sizes">
+                ${p.sizes.map(s => `
+                  <button class="size-pill ${selectedSizes[p.id] === s ? "selected" : ""}" onclick="selectSize(${p.id}, '${s}')">
+                    ${s}
+                  </button>
+                `).join("")}
+              </div>
+              <div class="card-actions">
+                <button class="btn-add" onclick="addToCart(${p.id})">Agregar</button>
+                <button class="btn-view" onclick="openModal(${p.id})" title="Ver detalle">👁️</button>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    function addToCart(id) {
+      const product = PRODUCTS.find(p => p.id === id);
+      const size = selectedSizes[id] || product.sizes[0];
+      const existing = cart.find(item => item.id === id && item.size === size);
+
+      if (existing) {
+        existing.qty++;
+      } else {
+        cart.push({ ...product, size, qty: 1 });
+      }
+      updateCartUI();
+      openCart();
+    }
+
+    function changeQty(index, delta) {
+      cart[index].qty += delta;
+      if (cart[index].qty <= 0) cart.splice(index, 1);
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      const container = document.getElementById("cartItems");
+      const totalItems = cart.reduce((sum, i) => sum + i.qty, 0);
+      const totalPrice = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
+
+      document.getElementById("cartCount").textContent = totalItems;
+      document.getElementById("cartTotal").textContent = `$${totalPrice.toFixed(2)}`;
+
+      if (cart.length === 0) {
+        container.innerHTML = `<p style="color:var(--muted); text-align:center; margin-top:40px;">Tu carrito está vacío. Elige alguna prenda del catálogo.</p>`;
+        return;
+      }
+
+      container.innerHTML = cart.map((item, idx) => `
+        <div class="cart-item">
+          <img src="${item.image}" alt="${item.name}" />
+          <div class="cart-item-info">
+            <strong>${item.name}</strong>
+            <div style="font-size:0.85rem; color:var(--muted);">Talla: ${item.size} • $${item.price.toFixed(2)} c/u</div>
+            <div class="qty-controls">
+              <button onclick="changeQty(${idx}, -1)">-</button>
+              <span>${item.qty}</span>
+              <button onclick="changeQty(${idx}, 1)">+</button>
+            </div>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function openCart() {
+      document.getElementById("overlay").classList.add("open");
+      document.getElementById("cartDrawer").classList.add("open");
+    }
+
+    function openModal(id) {
+      const p = PRODUCTS.find(item => item.id === id);
+      document.getElementById("modalImg").src = p.image;
+      document.getElementById("modalCat").textContent = `${p.category} • ${p.subcategory}`;
+      document.getElementById("modalTitle").textContent = p.name;
+      document.getElementById("modalPrice").textContent = `$${p.price.toFixed(2)}`;
+      document.getElementById("modalDesc").textContent = p.description;
+      document.getElementById("modalSizes").innerHTML = p.sizes.map(s => `
+        <button class="size-pill ${selectedSizes[p.id] === s ? "selected" : ""}" onclick="selectSize(${p.id}, '${s}'); openModal(${p.id});">
+          ${s}
+        </button>
+      `).join("");
+      document.getElementById("modalAddBtn").onclick = () => {
+        closeAllModals();
+        addToCart(p.id);
+      };
+
+      document.getElementById("overlay").classList.add("open");
+      document.getElementById("productModal").classList.add("open");
+    }
+
+    function closeAllModals() {
+      document.getElementById("overlay").classList.remove("open");
+      document.getElementById("cartDrawer").classList.remove("open");
+      document.getElementById("productModal").classList.remove("open");
+    }
+
+    function sendWhatsAppOrder() {
+      if (cart.length === 0) {
+        alert("Agrega al menos una prenda antes de enviar el pedido.");
+        return;
+      }
+
+      let message = "Hola Medatex 👋, me gustaría hacer el siguiente pedido:\n\n";
+      cart.forEach(item => {
+        message += `• ${item.qty}x ${item.name} (Talla ${item.size}) - $${(item.price * item.qty).toFixed(2)}\n`;
+      });
+
+      const total = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
+      message += `\n*Total estimado: $${total.toFixed(2)}*\n¿Me confirman disponibilidad?`;
+
+      const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+      window.open(url, "_blank");
+    }
+
+    renderProducts();
+    updateCartUI();
+  </script>
 </body>
 </html>
